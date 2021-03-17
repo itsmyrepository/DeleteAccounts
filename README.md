@@ -17,3 +17,9 @@ apikey (required)
 Run the script:
 
 ./DeleteAccounts.sh
+
+
+For more information about Trend Micro Cloud One & Cloud One Conformity visit:
+CloudConformity Official Website
+CloudConformity API Documentation
+Trend Micro Cloud One
