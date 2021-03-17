@@ -10,18 +10,19 @@ read -r apikey
 
 # get list of accounts in Conformity 
 
-for accountId in {`curl -L -X GET \
+export accountIds=(`curl -L -X GET \
         "https://$region-api.cloudconformity.com/v1/accounts" \
         -H "Content-Type: application/vnd.api+json" \
         -H "Authorization: ApiKey $apikey" \
-        | jq -r '.data | map(.id) | join(",")'`}
-do
-echo "List of accounts in Conformity $accountId";
+        | jq -r '.data | map(.id) | join(",")'`)
+        
+echo "List of accounts in Conformity $accountIds";
 
 # delete accounts in Conformity
-
-curl -X DELETE "https://$region-api.cloudconformity.com/v1/accounts/$accountId" \
+ for i in $(echo $accountIds | sed "s/,/ /g")
+do
+curl -X DELETE "https://$region-api.cloudconformity.com/v1/accounts/$i" \
      -H "Content-Type: application/vnd.api+json" \
      -H "Authorization: ApiKey $apikey"
 done
-      echo "These are all the accounts deleted successfully $accountId"
+      echo "These are all the accounts deleted successfully $i"
