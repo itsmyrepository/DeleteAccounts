@@ -16,7 +16,7 @@ export accountIds=(`curl -L -X GET \
         -H "Authorization: ApiKey $apikey" \
         | jq -r '.data | map(.id) | join(",")'`)
         
-echo "List of accounts in Conformity $accountIds";
+echo "List of accounts in Conformity $accountIds"
 
 # delete accounts in Conformity
  for i in $(echo $accountIds | sed "s/,/ /g")
